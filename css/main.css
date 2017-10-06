@@ -1,0 +1,409 @@
+nav {
+  background-color: #283d8a;
+  padding: 15px;
+  width: 100%;
+  text-align: center;
+    }
+
+nav img{
+  height: 5%;
+ 	width: 5%;
+
+}
+
+
+body {
+	background-color: #4169e1;
+}
+
+.row-1 {
+  padding-top: 4px;
+  text-align: center;
+}
+
+.slider {
+  padding-left: 130px;
+  height: 500px;
+  width: 650px;
+  overflow: hidden;
+}
+
+.slider .img {
+  height: auto;
+  width: 400px;
+}
+
+.img {
+  display: none;
+  overflow: hidden;
+}
+
+.row-1 .col-sm-6 {
+  padding-top: 140px;
+  padding-left: 30px;
+}
+
+.row-2 .col-sm-6 {
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.row-2 .col-sm-6 object {
+  width: 700px;
+  height: 300;
+}
+
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.css);
+
+// Mixins
+@mixin size($point) {
+  @if $point == small {
+    @media screen and (min-width: 500px) {
+      @content;
+    }
+  }
+  @if $point == large {
+    @media screen and (min-width: 880px) {
+      @content;
+    }
+  }
+}
+
+// Resets
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+
+
+
+
+// Globals
+.row {
+  display: flex;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.column-center {
+  align-items: center;
+}
+
+.split {
+  justify-content: space-between;
+}
+
+.split-center {
+  justify-content: space-around;
+}
+
+// Animations
+@keyframes fadeOne {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeTwo {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// Page Styles
+.Weather {
+  min-width: 350px;
+  // Main Bubble
+  &__main {
+    background: #71db71;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    text-align: center;
+    padding: 30px 0 15px;
+    @include size(small) {
+      width: 300px;
+      height: 300px;
+    }
+    @include size(large) {
+      width: 350px;
+      height: 350px;
+    }
+  }
+  // Local Weather Header
+  h3 {
+    font-size: 1.3rem;
+    font-weight: 300;
+    @include size(small) {
+      font-size: 1.7rem;
+    }
+    @include size(large) {
+      font-size: 2rem;
+    }
+  }
+  // Location Text
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    @include size(small) {
+      font-size: 2rem;
+    }
+    @include size(large) {
+      font-size: 2.425rem;
+    }
+  }
+  #temp {
+    font-size: 3rem;
+    display: inline-block;
+    position: relative;
+    animation: fadeOne .4s;
+    @include size(small) {
+      font-size: 3.4rem;
+    }
+    @include size(large) {
+      font-size: 4rem;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 11px;
+      right: -16px;
+      height: 7px;
+      width: 7px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      @include size(large) {
+        height: 10px;
+        width: 10px;
+        top: 16px;
+        right: -17px;
+      }
+    }
+    &.toggle {
+      animation: fadeTwo .4s;
+    }
+  }
+  // Unit Toggle
+  &__main-toggle {
+    margin: 0 0 0 16px;
+    & > span {
+      font-size: 1.2rem;
+      position: relative;
+      @include size(small) {
+        font-size: 1.5rem;
+      }
+      @include size(large) {
+        font-size: 1.7rem;
+      }
+      &:before {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 6px;
+        height: 3px;
+        width: 3px;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        @include size(large) {
+          width: 4px;
+          height: 4px;
+          top: 7px;
+        }
+      }
+      &:last-child {
+        margin-left: 11px;
+      }
+    }
+    // Toggle Switch
+    button {
+      background: #6bbf6b;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      width: 45px;
+      height: 20px;
+      margin: 5px 5px 0;
+      cursor: pointer;
+      position: relative;
+      transition: background .2s;
+      @include size(small) {
+        height: 25px;
+        width: 55px;
+      }
+      @include size(large) {
+        height: 30px;
+        width: 65px;
+      }
+      &:active {
+        background: #67b567;
+      }
+      #unit-toggle {
+        position: absolute;
+        display: inline-block;
+        left: 3px;
+        top: .13em;
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 50%;
+        transition: left .2s;
+        @include size(small) {
+          height: 20px;
+          width: 20px;
+        }
+        @include size(large) {
+          height: 24px;
+          width: 24px;
+          top: 3px;
+          left: 4px;
+        }
+        &.toggle {
+          left: 27px;
+          @include size(small) {
+            left: 32px;
+          }
+          @include size(large) {
+            left: 37px;
+          }
+        }
+      }
+    }
+  }
+  // Right Side Bubbles
+  &__right {
+    &-icon, &-time, &-refresh {
+      background: #71db71;
+      border-radius: 50%;
+      border: 3px solid #fff;
+      position: relative;
+      &:before {
+        content: '';
+        position: absolute;
+        height: 6px;
+        width: 50px;
+        background: #fff;
+        z-index: -1;
+      }
+    }
+    &-icon {
+      width: 100px;
+      height: 100px;
+      @include size(small) {
+        width: 120px;
+        height: 120px;
+      }
+      @include size(large) {
+        width: 130px;
+        height: 130px;
+      }
+      &:before {
+        left: -30px;
+        top: 70px;
+        transform: rotate(-30deg);
+        @include size(small) {
+          top: 80px;
+        }
+      }
+      #icon {
+        margin: 20px 0 5px 2px;
+        font-size: 2.3rem;
+        @include size(small) {
+          font-size: 3.2rem;
+          margin-top: 20px;
+        }
+        @include size(large) {
+          font-size: 3.5rem;
+        }
+      }
+      // Coverage Text
+      #coverage {
+        font-size: 1rem;
+        @include size(small) {
+          font-size: 1.05rem;
+        }
+        @include size(large) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+    &-time {
+      width: 85px;
+      height: 85px;
+      font-size: 1.5rem;
+      margin: 20px 0 5px 15px;
+      @include size(small) {
+        width: 100px;
+        height: 100px;
+        font-size: 1.8rem;
+      }
+      @include size(large) {
+        width: 115px;
+        height: 115px;
+        font-size: 2rem;
+      }
+      &:before {
+        top: 32px;
+        left: -30px;
+        @include size(small) {
+          top: 38px;
+        }
+        @include size(large) {
+          top: 47px;
+        }
+      }
+    }
+    &-refresh {
+      width: 65px;
+      height: 65px;
+      margin-left: -20px;
+      padding-bottom: 5px;
+      cursor: pointer;
+      transition: background .2s;
+      @include size(small) {
+        width: 75px;
+        height: 75px;
+      }
+      @include size(large) {
+        width: 80px;
+        height: 80px;
+      }
+      &:hover {
+        background: #6ed36e;
+      }
+      &:active {
+        background: #6ac96a;
+      }
+      &:before {
+        top: -4px;
+        left: -30px;
+        transform: rotate(40deg);
+      }
+      span {
+        font-size: .95rem;
+        @include size(small) {
+          font-size: 1.1rem;
+        }
+        @include size(large) {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+}
